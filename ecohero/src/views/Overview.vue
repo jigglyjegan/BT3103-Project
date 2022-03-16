@@ -14,7 +14,7 @@
 // Note: DO NOT MODIFY THIS FILE.
 
 <template>
-  <div>
+  <div v-if= "user">
     This is our about page
   </div>
 </template>
