@@ -14,15 +14,23 @@
 // Note: DO NOT MODIFY THIS FILE.
 
 <template>
-  <div>
-    This is our about page
-  </div>
+  <AboutApp/>
+  <BottomBar/>
 </template>
 
 <script>
 import { getAuth, onAuthStateChanged } from "firebase/auth";
+import AboutApp from '@/components/AboutApp.vue'
+import BottomBar from '@/components/BottomBar.vue'
 
 export default {
+  name: 'About',
+  components: {
+    BottomBar ,
+    AboutApp
+    
+  },
+
   data() {
     return {
           user: false,
@@ -37,9 +45,6 @@ export default {
       }
     });
   },
-},
+}
 
 </script>
-
-<style>
-</style>
