@@ -4,6 +4,7 @@
 
 // Changelog:
 // V0: Created template
+// V1: Added Top NavBar and Bottom NavBar
 
 // INSTRUCTIONS for use
 // 1) Make a COPY of this file
@@ -16,13 +17,17 @@
 <template>
   <div v-if= "user">
     <!-- Add stuff here -->
+    Replace with page's content
   </div>
+  <BottomBar/>
 </template>
 
 <script>
 import { getAuth, onAuthStateChanged } from "firebase/auth";
+import BottomBar from '@components/BottomBar.vue';
 
 export default {
+  components: { BottomBar },
   data() {
     return {
           user: false,

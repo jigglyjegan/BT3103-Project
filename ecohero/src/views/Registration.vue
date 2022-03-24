@@ -15,7 +15,8 @@
 
 <template>
   <div>
-    This is our about page
+    Register for an account and come join us today!
+
   </div>
 </template>
 

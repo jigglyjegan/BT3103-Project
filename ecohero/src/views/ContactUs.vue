@@ -14,31 +14,29 @@
 // Note: DO NOT MODIFY THIS FILE.
 
 <template>
-  <Contact/>
-    <BottomBar/>
-    
+  <Contact />
+  <BottomBar />
 </template>
 
 <script>
 import { getAuth, onAuthStateChanged } from "firebase/auth";
-import Contact from '@/components/Contact.vue'
-import BottomBar from '@/components/BottomBar.vue'
+import Contact from "@/components/Contact.vue";
+import BottomBar from "@/components/BottomBar.vue";
 
 export default {
-  name: 'ContactUs',
+  name: "ContactUs",
   components: {
     Contact,
-    BottomBar
-    
+    BottomBar,
   },
-  
+
   data() {
     return {
-          user: false,
+      user: false,
     };
   },
 
-    mounted() {
+  mounted() {
     const auth = getAuth();
     onAuthStateChanged(auth, (user) => {
       if (user) {
@@ -46,6 +44,5 @@ export default {
       }
     });
   },
-}
-
+};
 </script>
