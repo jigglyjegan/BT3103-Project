@@ -1,9 +1,5 @@
 <template>
   <TopBar />
-  <div v-if= "user">
-    <!-- Add stuff here -->
-    This is our Overview Page
-  </div>
   <BottomBar />
 </template>
 
@@ -13,6 +9,7 @@ import BottomBar from "@/components/BottomBar.vue";
 import TopBar from "@/components/TopBar.vue";
 
 export default {
+  name: "About",
   components: {
     BottomBar,
     TopBar,
@@ -34,6 +31,3 @@ export default {
   },
 };
 </script>
-
-<style>
-</style>

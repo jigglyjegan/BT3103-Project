@@ -1,30 +1,19 @@
 <template>
   <TopBar />
   <div style="text-align: center">
-    <h1 id="mainHead">EcoHero</h1>
-    <h2>Fill out our form or register using your Google account below!</h2>
-
     <form id="userForm">
-      <h1 class="headerDiv">Create Account</h1>
-      <h2 id="caption">Start taking accountability today!</h2>
-      <input type="text" id="name" required="" placeholder="Name" />
-      <br /><br />
-
+      <h1 class="headerDiv">Sign in to EcoHero</h1>
       <input type="text" id="email" required="" placeholder="Email" />
       <br /><br />
 
       <input type="text" id="pwd" required="" placeholder="Password" />
       <br /><br />
 
-      <input type="text" id="pwd2" required="" placeholder="Confirm Password" />
-      <br /><br />
-
-      <button id="savebutton" type="button" v-on:click="saveUser()">
-        Sign Up
+      <button id="savebutton" type="button" v-on:click="signIn()">
+        Sign In
       </button>
       <br /><br />
     </form>
-
     <div id="firebaseui-auth-container"></div>
   </div>
   <BottomBar />
@@ -32,54 +21,40 @@
 
 <script>
 import firebase from "@/uifire.js";
-import { getAuth, createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import "firebase/compat/auth";
 import * as firebaseui from "firebaseui";
 import "firebaseui/dist/firebaseui.css";
-import BottomBar from '@/components/BottomBar.vue';
-import TopBar from '@/components/TopBar.vue';
-
+import BottomBar from "@/components/BottomBar.vue";
+import TopBar from "@/components/TopBar.vue";
 
 export default {
-  name: "Registration",
+  name: "Login",
 
-  components: { 
+  components: {
     BottomBar,
-    TopBar 
+    TopBar,
   },
-  
+
   methods: {
     // ------------ Register User using our custom auth ------------ //
-    async saveUser() {
-      var name = document.getElementById("name").value;
+    async signIn() {
       var email = document.getElementById("email").value;
       var pwd = document.getElementById("pwd").value;
-      var pwd2 = document.getElementById("pwd2").value;
 
-      if (pwd != pwd2) { // Pwds do not match
-        alert("Passwords do not match. Please re-enter your password");
-        // Wait for user to re-enter passwords then try signing up again
-      } 
-      else {
-        try { 
-          const auth = getAuth();
-          createUserWithEmailAndPassword(auth, email, pwd).
-          then((userCredential) => {
-            // Signed in 
-            const user = userCredential.user; // Get User
-            updateProfile(user, {
-              displayName: name
-            });
-            document.getElementById("userForm").reset(); // User registered, reset form
-            this.$router.push('/'); 
-          });
-        }  catch (error) {
-            console.error("Error registering user: ", error);
-        }
+      try {
+        const auth = getAuth();
+        signInWithEmailAndPassword(auth, email, pwd).then(
+          () => {
+            this.$router.push("/");
+          }
+        );
+      } catch (error) {
+        console.error("Error signing in: ", error);
       }
-    }
+    },
   },
-        
+
   mounted() {
     //Calling UI instance
     var ui = firebaseui.auth.AuthUI.getInstance();

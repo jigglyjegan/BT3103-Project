@@ -14,9 +14,7 @@
 // Note: DO NOT MODIFY THIS FILE.
 
 <template>
-  <div>
-    This is our about page
-  </div>
+  <div>This is our forget password page</div>
 </template>
 
 <script>
@@ -25,11 +23,11 @@ import { getAuth, onAuthStateChanged } from "firebase/auth";
 export default {
   data() {
     return {
-          user: false,
+      user: false,
     };
   },
 
-    mounted() {
+  mounted() {
     const auth = getAuth();
     onAuthStateChanged(auth, (user) => {
       if (user) {
@@ -37,8 +35,7 @@ export default {
       }
     });
   },
-},
-
+};
 </script>
 
 <style>

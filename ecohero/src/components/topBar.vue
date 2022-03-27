@@ -1,19 +1,22 @@
 <template>
-  <img id= "logo" src="@/assets/icon.png" />
-  <div id= "notLogged" v-if= "!user">
+  <img id="logo" src="@/assets/icon.png" />
+  <div id="notLogged" v-if= "!user">
     <!-- Not logged in -->
     <div class="nav">
-        <router-link to "/signup"> Sign Up </router-link>
-        <router-link to "/login"> Login </router-link>
+      <router-link to="/registration"> Sign Up </router-link>
+      <router-link to="/login"> Login </router-link>
     </div>
   </div>
 
-  <div id= "logged" v-if= "user">
+  <div id="logged" v-if= "user">
     <div class="nav">
-        <router-link to "/home"> Home </router-link>
-        <router-link to /"overview"> Overview </router-link>
-        <router-link to "/data"> Data </router-link>
-        <router-link to "/reports"> Reports </router-link>
+      <router-link to="/"> Home </router-link>
+      <router-link to="/overview"> Overview </router-link>
+      <router-link to="/data"> Data </router-link>
+      <router-link to="/reports"> Reports </router-link>
+      <button id="userBtn" type="button" >
+        {{user.displayName}}
+      </button>
     </div>
   </div>
 </template>
@@ -22,7 +25,7 @@
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 export default {
-  name: "topBar",
+  name: "TopBar",
   data() {
     return {
       user: false,
@@ -45,25 +48,25 @@ img {
   position: left;
 }
 
-.notLogged {
-    position: right;
+#notLogged {
+  position: right;
 }
 
-.logged {
-    position: left;
+#logged {
+  position: left;
 }
 
-#nav {
+.nav {
   padding: 30px;
   text-align: center;
 }
 
-#nav a {
+.nav a {
   font-weight: bold;
   color: brown;
 }
 
-#nav a.router-link-exact-active {
+.nav a.router-link-exact-active {
   color: #32a96f;
 }
 </style>
