@@ -3,6 +3,8 @@ import About from "@/views/About.vue";
 import ChangeLimit from "@/views/ChangeLimit.vue";
 import ChangePass from "@/views/ChangePass.vue";
 import ContactUs from "@/views/ContactUs.vue";
+// import UploadPage from "@/views/CsvImport.vue";
+import CsvImport from "@/views/CsvImport.vue";
 import Data from "@/views/Data.vue";
 import ForgetPass from "@/views/ForgetPass.vue";
 import Home from "@/views/Home.vue";
@@ -29,7 +31,9 @@ const routes = [
     path: "/changeLimit",
     name: "ChangeLimit",
     component: ChangeLimit,
-  },  {
+  },  
+  
+  {
     path: "/changePass",
     name: "ChangePass",
     component: ChangePass,
@@ -41,6 +45,16 @@ const routes = [
     component: ContactUs,
   },
 
+  // {
+  //   path: "/UploadPage",
+  //   name: "UploadPage",
+  //   component: UploadPage,
+  // },
+  {
+    path: "/CsvImport",
+    name: "CsvImport",
+    component: CsvImport,
+  },
   {
     path: "/data",
     name: "Data",
