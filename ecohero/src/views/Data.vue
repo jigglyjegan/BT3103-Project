@@ -4,6 +4,7 @@
 
 // Changelog:
 // V0: Created template
+// V1: Added Top NavBar and Bottom NavBar
 
 // INSTRUCTIONS for use
 // 1) Make a COPY of this file
@@ -14,22 +15,32 @@
 // Note: DO NOT MODIFY THIS FILE.
 
 <template>
-  <div>
-    This is our about page
+  <TopBar />
+  <div v-if="user">
+    <!-- Add stuff here -->
+    This is our Data Page
   </div>
+  <BottomBar />
 </template>
 
 <script>
 import { getAuth, onAuthStateChanged } from "firebase/auth";
+import BottomBar from "@/components/BottomBar.vue";
+import TopBar from "../components/TopBar.vue";
 
 export default {
+  components: {
+    BottomBar,
+    TopBar,
+  },
+
   data() {
     return {
-          user: false,
+      user: false,
     };
   },
 
-    mounted() {
+  mounted() {
     const auth = getAuth();
     onAuthStateChanged(auth, (user) => {
       if (user) {
@@ -37,8 +48,7 @@ export default {
       }
     });
   },
-},
-
+};
 </script>
 
 <style>

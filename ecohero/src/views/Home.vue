@@ -1,21 +1,27 @@
 <template>
-    <Welcome/>
-    <GetStarted/>
-    <BottomBar/>
-    
+<!-- <CsvImport /> -->
+  <TopBar />
+  <Welcome />
+  <GetStarted />
+  <BottomBar />
+  
 </template>
 
 <script>
-import Welcome from '@/components/Welcome.vue'
-import GetStarted from '@/components/GetStarted.vue'
-import BottomBar from '@/components/BottomBar.vue'
+import TopBar from '@/components/TopBar.vue'
+import Welcome from "@/components/Welcome.vue";
+import GetStarted from "@/components/GetStarted.vue";
+import BottomBar from "@/components/BottomBar.vue";
+// import CsvImport from "@/components/CsvImport.vue";
 
 export default {
-  name: 'Home',
+  name: "Home",
   components: {
     Welcome,
     GetStarted,
-    BottomBar
-  }
-}
+    BottomBar,
+    TopBar
+    // CsvImport
+  },
+};
 </script>

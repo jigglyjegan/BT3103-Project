@@ -24,6 +24,8 @@
 
 <script>
 import { VueCsvImport } from "vue-csv-import";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+
 
 export default {
   name: "CsvImport",
@@ -35,6 +37,15 @@ export default {
       csv: null,
     };
   },
+    mounted() {
+    const auth = getAuth();
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        this.user = user;
+      }
+    });
+  },
+
 };
 </script>
 
