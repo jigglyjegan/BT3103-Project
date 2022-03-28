@@ -32,6 +32,7 @@ const routes = [
     name: "ChangeLimit",
     component: ChangeLimit,
   },  
+  
   {
     path: "/changePass",
     name: "ChangePass",
