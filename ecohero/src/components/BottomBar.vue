@@ -6,7 +6,8 @@
     <div id="nav">
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link> |
-      <router-link to="/contactUs">ContactUs</router-link>
+      <router-link to="/contactUs">ContactUs</router-link> | 
+      <router-link to="/excel">File Upload</router-link>
       <router-view />
     </div>
   </body>
