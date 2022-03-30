@@ -7,13 +7,35 @@
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link> |
       <router-link to="/contactUs">ContactUs</router-link> | 
-      <router-link to="/excel">File Upload</router-link>
+      <router-link to="/CSVImport">File Upload</router-link> |
+      <router-link to="/forgetPass" v-if="!user"> Forget Password </router-link>
       <router-view />
     </div>
   </body>
 </template>
 
 
+<script>
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+
+export default {
+  data() {
+    return {
+      user: false,
+
+    };
+  },
+
+  mounted() {
+    const auth = getAuth();
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        this.user = user;
+      }
+    });
+  }
+}
+</script>
 
 
 <style scoped>

@@ -2,7 +2,7 @@
   <TopBar />
   <div v-if= "user">
     <!-- Add stuff here -->
-    This is our Overview Page
+    This is our Reports Page
   </div>
   <BottomBar />
 </template>
