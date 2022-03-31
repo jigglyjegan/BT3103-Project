@@ -1,30 +1,35 @@
+// This file is a standard template with all the user auth added in.
+// For standardisation purposes, we will hence make our views 
+// using this template.
+
+// Changelog:
+// V0: Created template
+
+// INSTRUCTIONS for use
+// 1) Make a COPY of this file
+// 2) Rename the COPY to the filename needed
+// 3) Do everything inside your COPY of this file
+// 4) Delete this comment
+
+// Note: DO NOT MODIFY THIS FILE.
+
 <template>
-  <TopBar />
   <div v-if= "user">
-    <!-- Add stuff here -->
-    This is our Overview Page
+    This is our about page
   </div>
-  <BottomBar />
 </template>
 
 <script>
 import { getAuth, onAuthStateChanged } from "firebase/auth";
-import BottomBar from "@/components/BottomBar.vue";
-import TopBar from "@/components/TopBar.vue";
 
 export default {
-  components: {
-    BottomBar,
-    TopBar,
-  },
-
   data() {
     return {
-      user: false,
+          user: false,
     };
   },
 
-  mounted() {
+    mounted() {
     const auth = getAuth();
     onAuthStateChanged(auth, (user) => {
       if (user) {
@@ -32,7 +37,8 @@ export default {
       }
     });
   },
-};
+},
+
 </script>
 
 <style>

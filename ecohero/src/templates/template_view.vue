@@ -15,25 +15,19 @@
 // Note: DO NOT MODIFY THIS FILE.
 
 <template>
-  <TopBar />
   <div v-if= "user">
     <!-- Add stuff here -->
     Replace with page's content
   </div>
-  <BottomBar />
+  <BottomBar/>
 </template>
 
 <script>
 import { getAuth, onAuthStateChanged } from "firebase/auth";
-import BottomBar from '@/components/BottomBar.vue';
-import TopBar from '@/components/TopBar.vue';
+import BottomBar from '@components/BottomBar.vue';
 
 export default {
-  components: { 
-    BottomBar,
-    TopBar 
-  },
-
+  components: { BottomBar },
   data() {
     return {
           user: false,
@@ -48,7 +42,7 @@ export default {
       }
     });
   },
-}
+},
 
 </script>
 

@@ -14,37 +14,22 @@
 // Note: DO NOT MODIFY THIS FILE.
 
 <template>
-  <div>This is our forget password page</div>
-   <div style="text-align: center">
-    <form id="userForm">
-      <h1 class="headerDiv">Reset Password</h1>
-      <input type="text" id="email" required="" placeholder="Email" />
-      <br /><br />
-
-      <button id="resetButton" type="button" v-on:click="sendEmail()">
-        Reset
-      </button>
-      <br /><br />
-    </form>
-    <div id="firebaseui-auth-container"></div>
+  <div>
+    This is our about page
   </div>
 </template>
 
 <script>
 import { getAuth, onAuthStateChanged } from "firebase/auth";
-import firebase from "@/uifire.js";
 
 export default {
   data() {
     return {
-      user: false,
-      email: "",
-      error: null,
-      emailSending: false
+          user: false,
     };
   },
 
-  mounted() {
+    mounted() {
     const auth = getAuth();
     onAuthStateChanged(auth, (user) => {
       if (user) {
@@ -52,32 +37,8 @@ export default {
       }
     });
   },
+},
 
-  methods: {
-    sendEmail() {
-    var email = document.getElementById("email").value;
-    if (!email) {
-    this.error = "Please type in a valid email address.";
-    return;
-  }
-  this.error = null;
-  this.emailSending = true;
-  firebase
-    .auth()
-    .sendPasswordResetEmail(email)
-    .then(() => {
-      this.emailSending = false;
-      alert("Email sent!")
-      this.$router.push("/");
-    })
-    .catch(error => {
-      this.emailSending = false;
-      this.error = error.message;
-    });
-}
-
-  }
-};
 </script>
 
 <style>

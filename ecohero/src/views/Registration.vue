@@ -1,131 +1,46 @@
+// This file is a standard template with all the user auth added in.
+// For standardisation purposes, we will hence make our views 
+// using this template.
+
+// Changelog:
+// V0: Created template
+
+// INSTRUCTIONS for use
+// 1) Make a COPY of this file
+// 2) Rename the COPY to the filename needed
+// 3) Do everything inside your COPY of this file
+// 4) Delete this comment
+
+// Note: DO NOT MODIFY THIS FILE.
+
 <template>
-  <TopBar />
-  <div style="text-align: center">
-    <h1 id="mainHead">EcoHero</h1>
-    <h2>Fill out our form or register using your Google account below!</h2>
+  <div>
+    Register for an account and come join us today!
 
-    <form id="userForm">
-      <h1 class="headerDiv">Create Account</h1>
-      <h2 id="caption">Start taking accountability today!</h2>
-      <input type="text" id="name" required="" placeholder="Name" />
-      <br /><br />
-
-      <input type="text" id="email" required="" placeholder="Email" />
-      <br /><br />
-
-      <input type="text" id="pwd" required="" placeholder="Password" />
-      <br /><br />
-
-      <input type="text" id="pwd2" required="" placeholder="Confirm Password" />
-      <br /><br />
-
-      <button id="savebutton" type="button" v-on:click="saveUser()">
-        Sign Up
-      </button>
-      <br /><br />
-    </form>
-
-    <div id="firebaseui-auth-container"></div>
   </div>
-  <BottomBar />
 </template>
 
 <script>
-import firebase from "@/uifire.js";
-import { getAuth, createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
-import "firebase/compat/auth";
-import * as firebaseui from "firebaseui";
-import "firebaseui/dist/firebaseui.css";
-import BottomBar from '@/components/BottomBar.vue';
-import TopBar from '@/components/TopBar.vue';
-
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 export default {
-  name: "Registration",
-
-  components: { 
-    BottomBar,
-    TopBar 
-  },
-  
-  methods: {
-    // ------------ Register User using our custom auth ------------ //
-    async saveUser() {
-      var name = document.getElementById("name").value;
-      var email = document.getElementById("email").value;
-      var pwd = document.getElementById("pwd").value;
-      var pwd2 = document.getElementById("pwd2").value;
-
-      if (pwd != pwd2) { // Pwds do not match
-        alert("Passwords do not match. Please re-enter your password");
-        // Wait for user to re-enter passwords then try signing up again
-      } 
-      else {
-        try { 
-          const auth = getAuth();
-          createUserWithEmailAndPassword(auth, email, pwd).
-          then((userCredential) => {
-            // Signed in 
-            const user = userCredential.user; // Get User
-            updateProfile(user, {
-              displayName: name
-            });
-            document.getElementById("userForm").reset(); // User registered, reset form
-            this.$router.push('/'); 
-          });
-        }  catch (error) {
-            console.error("Error registering user: ", error);
-        }
-      }
-    }
-  },
-        
-  mounted() {
-    //Calling UI instance
-    var ui = firebaseui.auth.AuthUI.getInstance();
-    if (!ui) {
-      // We only create the instance once
-      // Initialise the FirebaseUI widget using Firebase.
-      ui = new firebaseui.auth.AuthUI(firebase.auth());
-    }
-
-    var uiconfig = {
-      signInSuccessUrl: "/home",
-      signInOptions: [
-        firebase.auth.GoogleAuthProvider.PROVIDER_ID,
-        // firebase.auth.EmailAuthProvider.PROVIDER_ID,
-      ],
+  data() {
+    return {
+          user: false,
     };
-    ui.start("#firebaseui-auth-container", uiconfig);
   },
-};
+
+    mounted() {
+    const auth = getAuth();
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        this.user = user;
+      }
+    });
+  },
+},
+
 </script>
 
-<style scoped>
-h1 {
-  text-align: c;
-  color: aliceblue;
-}
-
-#firebaseui-auth-container {
-  margin-top: 50px;
-  margin-bottom: 50px;
-}
-
-#mainHead {
-  text-align: center;
-  text-shadow: 2px 2px grey;
-}
-
-#bg {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  width: 60%;
-}
-
-h2 {
-  text-align: center;
-  color: aliceblue;
-}
+<style>
 </style>
