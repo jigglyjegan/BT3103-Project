@@ -12,7 +12,7 @@
 export default {
 methods: {
    goToHome() {
-   this.$router.push('/about'); 
+   this.$router.push('/login'); 
       }
   }
 }

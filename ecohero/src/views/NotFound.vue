@@ -1,21 +1,24 @@
 <template>
-  <TopBar />
-  <div v-if= "user">
-    <!-- Add stuff here -->
-    This is our Overview Page
+  <div style="text-align: center">
+    <TopBar />
+    <h1>Page Not Found!!</h1>
+    <h2>Please click on the available options above</h2>
+    <BottomBar />
+    <br />
   </div>
-  <BottomBar />
 </template>
 
 <script>
 import { getAuth, onAuthStateChanged } from "firebase/auth";
-import BottomBar from "@/components/BottomBar.vue";
-import TopBar from "@/components/TopBar.vue";
+import TopBar from '@/components/TopBar.vue';
+import BottomBar from '@/components/BottomBar.vue';
 
 export default {
+  name: "NotFound",
+
   components: {
-    BottomBar,
     TopBar,
+    BottomBar
   },
 
   data() {
