@@ -6,14 +6,13 @@
     <div id="nav">
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link> |
-      <router-link to="/contactUs">ContactUs</router-link> | 
-      <router-link to="/CSVImport">File Upload</router-link> |
+      <router-link to="/contactUs">Contact Us</router-link> |
+      <router-link to="/CsvImport">Csv Import</router-link> |
       <router-link to="/forgetPass" v-if="!user"> Forget Password </router-link>
       <router-view />
     </div>
   </body>
 </template>
-
 
 <script>
 import { getAuth, onAuthStateChanged } from "firebase/auth";
@@ -36,7 +35,6 @@ export default {
   }
 }
 </script>
-
 
 <style scoped>
 body {
