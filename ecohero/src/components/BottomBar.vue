@@ -7,7 +7,6 @@
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link> |
       <router-link to="/contactUs">Contact Us</router-link> |
-      <router-link to="/CsvImport">Csv Import</router-link> |
       <router-link to="/forgetPass" v-if="!user"> Forget Password </router-link>
       <router-view />
     </div>
@@ -49,8 +48,17 @@ body {
   font-size: 15px;
 }
 
-#nav a {
+.nav {
+  padding: 30px;
+  text-align: center;
+}
+
+.nav a {
   font-weight: bold;
-  color: white;
+  color: brown;
+}
+
+.nav a.router-link-exact-active {
+  color: #32a96f;
 }
 </style>
