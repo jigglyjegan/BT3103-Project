@@ -14,16 +14,37 @@
 // Note: DO NOT MODIFY THIS FILE.
 
 <template>
-  <div v-if= "user">This is our change pass page</div>
+   <form id="userForm">
+      <h1 class="headerDiv">Change Password</h1>
+      <input type="text" id="email" required="" placeholder="Email" />
+      <br /><br />
+
+      <input type="text" id="pwd" required="" placeholder="Old Password" />
+      <br /><br />
+
+      <input type="text" id="newPwd" required="" placeholder="New Password" />
+      <br /><br />
+
+      <button id="change" type="button" v-on:click="changePass()">
+        Change Password
+      </button>
+      <br /><br />
+    </form>
+
+
 </template>
 
 <script>
 import { getAuth, onAuthStateChanged } from "firebase/auth";
+import firebase from "@/uifire.js";
+
 
 export default {
   data() {
     return {
       user: false,
+      error: null,
+      correctCredential: false
     };
   },
 
@@ -35,6 +56,38 @@ export default {
       }
     });
   },
+
+  methods: {
+    changePass(){
+      this.error = null;
+      this.correctCredential = false;
+      //var email = document.getElementById("email").value;
+      var pwd = document.getElementById("pwd").value;
+      var newPwd = document.getElementById("newPwd").value;
+
+      this.reauthenticate(pwd).then(() => {
+      var user = firebase.auth().currentUser;
+      user.updatePassword(newPwd).then(() => {
+      alert("Password updated!");
+      this.$router.push({name: 'Login'});
+      }).catch((error) => { alert(error); });
+      }).catch((error) => { alert(error); });
+
+  
+    },
+    reauthenticate(currentPassword) {
+    var user = firebase.auth().currentUser;
+    var cred = firebase.auth.EmailAuthProvider.credential(
+      user.email, currentPassword);
+    return user.reauthenticateWithCredential(cred);
+  }
+
+
+
+
+  }
+  
+  
 };
 </script>
 

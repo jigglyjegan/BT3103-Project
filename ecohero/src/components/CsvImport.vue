@@ -1,10 +1,12 @@
-<template>
+ <template>
   <div v-if= "user">
     <form id= "uploadForm">
       <input type="file" id="inputFile" accept="csv" placeholder="Upload File Here"/>
       <button id="savebutton" type="button" v-on:click="uploadFile()"> Upload </button>
     </form>
   </div>
+
+
 </template>
 
 <script>
@@ -13,7 +15,6 @@ import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 import { doc, setDoc } from "firebase/firestore";
 import { getStorage, ref, uploadBytes } from "firebase/storage";
-
 const db = getFirestore(firebaseApp);
 const storage = getStorage();
 
