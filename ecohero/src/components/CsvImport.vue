@@ -1,4 +1,4 @@
- <template>
+<template>
   <div v-if= "user">
     <form id= "uploadForm">
       <input type="file" id="inputFile" accept="csv" placeholder="Upload File Here"/>

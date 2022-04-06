@@ -16,7 +16,7 @@
     </form>
     <div id="firebaseui-auth-container"></div>
   </div>
-  <BottomBar />
+  <!--<BottomBar />-->
 </template>
 
 <script>
@@ -25,14 +25,14 @@ import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import "firebase/compat/auth";
 import * as firebaseui from "firebaseui";
 import "firebaseui/dist/firebaseui.css";
-import BottomBar from "@/components/BottomBar.vue";
+//import BottomBar from "@/components/BottomBar.vue";
 import TopBar from "@/components/TopBar.vue";
 
 export default {
   name: "Login",
 
   components: {
-    BottomBar,
+    //BottomBar,
     TopBar,
   },
 
@@ -93,6 +93,7 @@ h1 {
 }
 
 #bg {
+  margin-top: 30px;
   display: block;
   margin-left: auto;
   margin-right: auto;
