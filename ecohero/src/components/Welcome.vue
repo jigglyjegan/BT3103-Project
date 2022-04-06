@@ -1,7 +1,7 @@
 <template>
     <div class="big-image">
         <div class="overlay">
-          <h1>ECO-HERO</h1>
+          <h1>EcoHero</h1>
           <p>SAVE THE WORLD, SAVE YOUR BILLS.</p>
         </div>
       </div>

@@ -17,6 +17,7 @@
     "vue": "^3.0.0",
     "vue-csv-import": "^4.1.2",
     "vue-router": "^4.0.14",
+    "vue3-animate-onscroll": "^1.0.6",
     "xlsx": "^0.18.5"
   },
   "devDependencies": {

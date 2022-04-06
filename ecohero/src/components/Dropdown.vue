@@ -1,10 +1,11 @@
+
 <template>
   <div>
       <div class = "menu" @click="isOpen = !isOpen">
           {{title}}
           <svg viewBox="0 0 1030 638" width="0">
               <path d="M1017 68L541 626q-11 12-26 12t-26-12L13 68Q-3 49 6 24.5T39 0h952q240 33 24.5t-7 43.5z" fill = "#FFF"> </path>
-          </svg> <!-- tbh this part no need -->
+          </svg> 
 
             <transition name="fade" appear>
                 <div class = "sub-menu" v-if="isOpen">
@@ -14,10 +15,10 @@
                     <div class="menu-item">
                         <router-link to="/changeLimits">Change Limits</router-link>
                     </div>
-                    <div class="menu-item">
+                   <!-- <div class="menu-item">
                         <Logout ref="customLogout"/>
                         <button id="logout" @click="runLogout">Logout</button>
-                    </div>
+                    </div>-->
                 </div>
             </transition>
 
@@ -66,8 +67,8 @@ export default {
     background-color: black;
     top: calc(100% + 18px);
     left: 50%;
+    width: "max-width";
     transform: translateX(-50%);
-    width: max-content;
     border-radius:0px 0px 16px 16px ;
 }
 
@@ -82,3 +83,5 @@ export default {
 }
 
 </style>
+
+

@@ -20,7 +20,7 @@ methods: {
 
 <style scoped>
     .get-started {
-      background-color: gray;
+      background-color: white;
       height: 1000px;
       position: relative;
       text-align: center;

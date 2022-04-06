@@ -1,11 +1,7 @@
 <template>
   <body>
-    <div class="pte-ltd">
-      <h3>ECO HERO PTE LTD</h3>
-    </div>
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link> |
+    <div id="nav" v-if="!user">
+      <router-link to="/" v-if="user">Home</router-link> |
       <router-link to="/contactUs">Contact Us</router-link> |
       <router-link to="/forgetPass" v-if="!user"> Forget Password </router-link>
       <router-view />
@@ -37,7 +33,7 @@ export default {
 
 <style scoped>
 body {
-  background-color: black;
+  background-color: white;
 }
 
 .pte-ltd {

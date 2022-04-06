@@ -1,27 +1,32 @@
 <template>
-  <img id="logo" src="@/assets/icon.png" />
-  <div id="notLogged" v-if= "!user">
-    <!-- Not logged in -->
-    <div class="nav">
-      <router-link to="/registration"> Sign Up </router-link> | 
-      <router-link to="/login"> Login </router-link>
-    </div>
-  </div>
-
-  <div id="logged" v-if= "user">
-    <div class="nav">
-      <router-link to="/"> Home </router-link> | 
-      <router-link to="/overview"> Overview </router-link> | 
-      <router-link to="/data"> Data </router-link> |
-      <router-link to="/reports"> Reports </router-link> |
-      <button id="userBtn" type="button" v-if="user">
-        {{user.displayName}}
-      </button>
+  <div id="navbar">
+    <div id="notLogged" v-if= "!user">
+      <!-- Not logged in -->
+      <div class="nav">
+        <router-link to="/registration"> Sign Up </router-link> | 
+        <router-link to="/login"> Login </router-link> | 
+        <router-link to="/contactUs">Contact Us</router-link> |
+      <router-link to="/forgetPass" v-if="!user"> Forget Password </router-link>
+      </div>
     </div>
 
+    <div id="logged" v-if= "user">
+      <div class="nav">
+        <router-link to="/"> Home </router-link> |
+        <router-link to="/overview"> Overview </router-link> | 
+        <router-link to="/about">About</router-link> |
+        <router-link to="/data"> Data </router-link> |
+        <router-link to="/reports" > Reports </router-link> |
+        <p id="user" v-if="user">
+         {{user.displayName}}
+        </p>
+        <div class="account">
+        <Dropdown title = "Account Settings" :items="account"/> 
+      </div>
+      </div>
 
-    <div class="account">
-      <Dropdown title = "Account Settings" :items="account"/> 
+
+      
     </div>
   </div>
 </template>
@@ -64,7 +69,11 @@ export default {
 };
 </script>
 
+
+
+
 <style scoped>
+
 img {
   position: left;
 }
@@ -80,13 +89,14 @@ img {
 
 .nav {
   padding: 30px;
-  text-align: center;
+  text-align: left;
 }
 
 .nav a {
   font-weight: bold;
-  color: brown;
+  color: black;
 }
+
 
 .nav a.router-link-exact-active {
   color: #32a96f;
