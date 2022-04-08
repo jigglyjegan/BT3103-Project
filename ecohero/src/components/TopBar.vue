@@ -17,6 +17,7 @@
         <router-link to="/about">About</router-link> |
         <router-link to="/data"> Data </router-link> |
         <router-link to="/reports" > Reports </router-link> |
+        <router-link to="/changeLimit"> Set Thresholds </router-link>
         <p id="user" v-if="user">
          {{user.displayName}}
         </p>
