@@ -17,9 +17,12 @@
     "firebaseui": "^0.600.0",
     "jquery": "^3.6.0",
     "vue": "^3.0.0",
+    "vue-csv-import": "^4.1.2",
+    "vue-router": "^4.0.14",
+    "vue3-animate-onscroll": "^1.0.6",
+    "xlsx": "^0.18.5",
     "vue-chartjs": "^4.0.4",
-    "vue-chartkick": "^1.1.0",
-    "vue-router": "^4.0.14"
+    "vue-chartkick": "^1.1.0"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.5.13",
@@ -28,7 +31,8 @@
     "@vue/compiler-sfc": "^3.0.0",
     "babel-eslint": "^10.1.0",
     "eslint": "^6.7.2",
-    "eslint-plugin-vue": "^7.0.0"
+    "eslint-plugin-vue": "^7.0.0",
+    "papaparse": "^5.3.2"
   },
   "eslintConfig": {
     "root": true,

@@ -3,7 +3,7 @@ import App from './App.vue'
 import router from './router/index.js'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { fas } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesomes'
 import VueChartkick from 'vue-chartkick'
 import 'chartkick/chart.js'
 
