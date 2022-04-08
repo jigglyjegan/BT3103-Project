@@ -11,6 +11,9 @@ import NotFound from '@/views/NotFound.vue';
 import Overview from '@/views/Overview.vue';
 import Registration from '@/views/Registration.vue';
 import Reports from "@/views/Reports.vue";
+import ReportsCompany from '@/views/ReportsCompany.vue'
+import ReportsDepartment from '@/views/ReportsDepartment.vue'
+
 
 const routes = [
   {
@@ -77,6 +80,18 @@ const routes = [
     path: "/reports",
     name: "Reports",
     component: Reports,
+  },
+
+  {
+    path: "/reportsDepartment",
+    name: "ReportsDepartment",
+    component: ReportsDepartment,
+  },
+
+  {
+    path: "/reportsCompany",
+    name: "ReportsCompany",
+    component: ReportsCompany,
   },
 
   { // Keep this at the bottom, and delete this comment when the project is done. 
