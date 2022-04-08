@@ -4,7 +4,6 @@
     <!-- Add stuff here -->
     This is our Reports Page
   </div>
-  <Chart/>
   <BottomBar />
 </template>
 
@@ -12,14 +11,11 @@
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import BottomBar from "@/components/BottomBar.vue";
 import TopBar from "@/components/TopBar.vue";
-import Chart from "@/components/Chart.vue";
-
 
 export default {
   components: {
     BottomBar,
     TopBar,
-    Chart
   },
 
   data() {
