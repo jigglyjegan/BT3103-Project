@@ -98,8 +98,18 @@ export default {
       //include dropdown option for collection
       const z = await getDoc(doc(db, "elecUsageDaily", dataRef))
       usage = z.data()
-      console.log(usage)
-      this.dataSet = usage;
+      const objectArray = Object.entries(usage); 
+ 
+      objectArray.forEach(([key, value]) => { 
+        console.log(key);  
+        console.log(value);  
+      }); 
+ 
+      var sortedArray = objectArray.sort(function(a, b) { return a[0] - b[0]; }); 
+ 
+ 
+      console.log(sortedArray) 
+      this.dataSet = sortedArray;
     }
   }
 };
