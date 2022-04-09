@@ -93,7 +93,7 @@ export default {
       var selectDept = document.getElementById('dept');
       var valueDept = selectDept.options[selectDept.selectedIndex].value;
       //change "RcKRjeuP7ybC3KxJsDBthyQrDlI3" to uid
-      var dataRef = "RcKRjeuP7ybC3KxJsDBthyQrDlI3" + valueDept + valueYear + valueMonth
+      var dataRef = uid + valueDept + valueYear + valueMonth
       console.log(dataRef)
       //include dropdown option for collection
       const z = await getDoc(doc(db, "elecUsageDaily", dataRef))

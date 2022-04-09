@@ -15,7 +15,7 @@ THIS FILE.
     </p>
     <p>If you exceed your limits, an alert will pop up!</p>
     <form id="form">
-      <label for="carbon">Carbon: </label>
+      <label for="carbon">Carbon (metric tonnes): </label>
       <input
         type="text"
         id="carbon"
@@ -23,10 +23,10 @@ THIS FILE.
         placeholder="Enter Threshold"
       />
       <br /><br />
-      <label for="water">Water: </label>
+      <label for="water">Water (cubic metres): </label>
       <input type="text" id="water" required="" placeholder="Enter Threshold" />
       <br /><br />
-      <label for="electricity ">Electricity: </label>
+      <label for="electricity ">Electricity (kWh): </label>
       <input
         type="number"
         id="electricity"
@@ -38,9 +38,15 @@ THIS FILE.
         <button id="saveButton" type="button" v-on:click="savetofs()">
           Save
         </button>
+        <p>Check if you have exceeded your thresholds here</p>
+         <button id="checkButton" type="button" v-on:click="checkLimits()">
+          Check
+        </button>
         <br /><br />
       </div>
     </form>
+    <Footer/>
+    <Logout/>
   </div>
 </template>
 
@@ -48,14 +54,17 @@ THIS FILE.
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import firebaseApp from "@/firebase.js";
 import { getFirestore } from "firebase/firestore";
-import { doc, setDoc } from "firebase/firestore";
+import { doc, setDoc, getDoc } from "firebase/firestore";
 import TopBar from "@/components/TopBar.vue";
+import Logout from "@/components/Logout.vue"
+import Footer from "@/components/Footer.vue"
 
 const db = getFirestore(firebaseApp);
-
 export default {
   components: {
     TopBar,
+    Logout,
+    Footer
   },
   data() {
     return {
@@ -93,6 +102,73 @@ export default {
         console.error("Error adding document: ", error);
       }
     },
+
+    async checkLimits(){
+      var notExceededAny = true
+      const month = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+      const date = new Date()
+      var monthName = month[date.getMonth()]
+      const year = date.getFullYear()
+      var uid = this.user.uid;
+      console.log(uid);
+
+      var userThreshold = await getDoc(doc(db, "/limits", uid));
+      var userThresholdValue = userThreshold.data() 
+      console.log(userThresholdValue)
+      var carbonThresholdValue = userThresholdValue['carbon']
+      console.log(carbonThresholdValue)
+      var waterThresholdValue = userThresholdValue['water']
+      console.log(waterThresholdValue)
+      var electricityThresholdValue = userThresholdValue['electricity']
+      console.log(electricityThresholdValue)
+
+      var dataRef1 = uid + "Finance" + year;
+      var dataRef2 = uid + "HR" + year 
+
+      var electricityFinance = await getDoc(doc(db, "/elecUsageMthly",dataRef1))
+      var electricityHR = await getDoc(doc(db, "/elecUsageMthly",dataRef2))
+      var electricityFinanceValue = electricityFinance.data()
+      console.log(electricityFinanceValue)
+      var electricityHRValue = electricityHR.data()
+      var thisMonthElectric = electricityFinanceValue[String(monthName)] + electricityHRValue[String(monthName)]
+      console.log(thisMonthElectric)
+
+      var waterFinance = await getDoc(doc(db, "/waterUsageMthly",dataRef1))
+      var waterHR = await getDoc(doc(db, "/waterUsageMthly",dataRef2))
+      var waterFinanceValue = waterFinance.data()
+      console.log(waterFinanceValue)
+      var waterHRValue = waterHR.data()
+      var thisMonthWater = waterFinanceValue[String(monthName)] + waterHRValue[String(monthName)]
+      console.log(thisMonthWater)
+
+      var carbonFinance = await getDoc(doc(db, "/carbonUsageMthly",dataRef1))
+      var carbonHR = await getDoc(doc(db, "/carbonUsageMthly",dataRef2))
+      var carbonFinanceValue = carbonFinance.data()
+      console.log(carbonFinanceValue)
+      var carbonHRValue = carbonHR.data()
+      var thisMonthCarbon = carbonFinanceValue[String(monthName)] + carbonHRValue[String(monthName)]
+      console.log(thisMonthCarbon)
+
+      if(waterThresholdValue < thisMonthWater){
+        alert("You have exceeded your water usage limit")
+        notExceededAny = false
+      }
+      if(carbonThresholdValue < thisMonthCarbon){
+        alert("You have exceeded your carbon emissions limit")
+        notExceededAny = false
+      }
+      if(electricityThresholdValue < thisMonthElectric){
+        alert("You have exceeded your electricity usage limit")
+        notExceededAny = false
+      }
+
+      if(notExceededAny){
+        alert("No metrics exceeded")
+      }
+
+    }
+
+
   },
 };
 </script>

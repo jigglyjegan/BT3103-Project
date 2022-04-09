@@ -2,7 +2,6 @@
   <div class="big-image">
     <div class="overlay">
       <h1>About Us</h1>
-      <p>blahblah</p>
     </div>
   </div>
 </template>

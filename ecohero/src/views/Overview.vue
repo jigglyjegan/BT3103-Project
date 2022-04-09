@@ -4,17 +4,20 @@
     <!-- Add stuff here -->
     This is our Overview Page
   </div>
-  <BottomBar />
+  <Footer />
+  <Logout/>
 </template>
 
 <script>
 import { getAuth, onAuthStateChanged } from "firebase/auth";
-import BottomBar from "@/components/BottomBar.vue";
+import Footer from "@/components/Footer.vue"
+import Logout from "@/components/Logout.vue"
 import TopBar from "@/components/TopBar.vue";
 
 export default {
   components: {
-    BottomBar,
+    Footer,
+    Logout,
     TopBar,
   },
 
