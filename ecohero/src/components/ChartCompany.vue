@@ -1,42 +1,64 @@
 <template>
   <div v-if= "user">
-    <select id = "month" @onchange="selectNum" v-model = "selected">
-      <option disabled value="">Please select one</option>
-      <option value="01">January</option>
-      <option value="02">February</option>
-      <option value="03">March</option>
-      <option value="04">April</option>
-      <option value="05">May</option>
-      <option value="06">June</option>
-      <option value="07">July</option>
-      <option value="08">August</option>
-      <option value="09">September</option>
-      <option value="10">October</option>
-      <option value="11">November</option>
-      <option value="12">December</option>
-    </select>
-    <span>Selected: {{ selected }}</span>
+    <div id = "options">
+      <div id = "title">
+        <h3> Metric :   </h3>
+      </div>
+      <select id = "metric" @onchange="selectNum" v-model = "selected3">
+        <option disabled value="">Please select one</option>
+        <option value="elecUsage">Electricity</option>
+        <option value="waterUsage">Water</option>
+        <option value="carbonUsage">Carbon</option>
+      </select>
+    </div>
 
-    <select id = "year" @onchange="selectNum" v-model = "selected1">
-      <option disabled value="">Please select one</option>
-      <option value="2018">2018</option>
-      <option value="2019">2019</option>
-      <option value="2020">2020</option>
-      
-    </select>
-    <span>Selected: {{ selected1 }}</span>
+    <div id = "options">
+      <div id = "title">
+        <h3> Month :</h3>
+      </div>
+      <select id = "month" @onchange="selectNum" v-model = "selected">
+        <option disabled value="">Please select one</option>
+        <option value="01">January</option>
+        <option value="02">February</option>
+        <option value="03">March</option>
+        <option value="04">April</option>
+        <option value="05">May</option>
+        <option value="06">June</option>
+        <option value="07">July</option>
+        <option value="08">August</option>
+        <option value="09">September</option>
+        <option value="10">October</option>
+        <option value="11">November</option>
+        <option value="12">December</option>
+      </select>
+    </div>
 
-    <select id = "dept" @onchange="selectNum" v-model = "selected2">
-      <option disabled value="">Please select one</option>
-      <option value="Finance">Finance</option>
-      <option value="HR">HR</option>  
-    </select>
-    <span>Selected: {{ selected2 }}</span>
-    <button id = "savebutton" type = "button" v-on:click="graphData(this.user)">Save</button>
-    <line-chart :data="this.dataSet"></line-chart>
-    <section class = "w-full flex justify-center">
-        <div @click="refresh" class = "border-2 px-3 py-1 mt-6 cursor-pointer">refresh</div>
-    </section>
+    <div id = "options">
+      <div id = "title">
+        <h3> Year :</h3>
+      </div>
+      <select id = "year" @onchange="selectNum" v-model = "selected1">
+        <option disabled value="">Please select one</option>
+        <option value="2018">2018</option>
+        <option value="2019">2019</option>
+        <option value="2020">2020</option>
+      </select>
+    </div>
+
+    <div id = "options">
+      <div id = "title">
+        <h3> Department :</h3>
+      </div>
+      <select id = "dept" @onchange="selectNum" v-model = "selected2">
+        <option disabled value="">Please select one</option>
+        <option value="Finance">Finance</option>
+        <option value="IT">IT</option>  
+        <option value="Logistics"> Logistics </option>
+      </select>
+    </div>
+
+    <button id = "savebutton" type = "button" v-on:click="graphData(this.user)">Go</button>
+    <column-chart :data="this.dataSet"  xtitle = "Day"   ytitle = "Amount"></column-chart>
   </div>
 </template>
 
@@ -61,6 +83,7 @@ export default {
       selected : '',
       selected1: '',
       selected2: '',
+      selected3: '',
       dataSet: {},
       department: "",
       year: "",
@@ -92,11 +115,13 @@ export default {
       var valueYear = selectYear.options[selectYear.selectedIndex].value;
       var selectDept = document.getElementById('dept');
       var valueDept = selectDept.options[selectDept.selectedIndex].value;
+      var selectMetric = document.getElementById('metric');
+      var valueMetric = selectMetric.options[selectMetric.selectedIndex].value + "Daily";
       //change "RcKRjeuP7ybC3KxJsDBthyQrDlI3" to uid
-      var dataRef = "RcKRjeuP7ybC3KxJsDBthyQrDlI3" + valueDept + valueYear + valueMonth
+      var dataRef = uid + valueDept + valueYear + valueMonth
       console.log(dataRef)
       //include dropdown option for collection
-      const z = await getDoc(doc(db, "elecUsageDaily", dataRef))
+      const z = await getDoc(doc(db, valueMetric, dataRef))
       usage = z.data()
       
       const objectArray = Object.entries(usage);
@@ -116,4 +141,14 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+#options {
+  display: inline-block;
+  margin-left: 5em;
+}
+
+#title {
+  display: inline-block;
+  margin-right: 0.5em;
+}
+</style>

@@ -1,33 +1,32 @@
 <template>
   <div v-if= "user">
-    <select id = "type" @onchange="selectNum" v-model = "selected">
-      <option disabled value="">Please select one</option>
-      <option value="day">By Day</option>
-      <option value="month">By Month</option>
-      <option value="year">By Year</option>
-    </select>
-    <span>Selected: {{ selected }}</span>
+    <div id ="options">
+      <div id = "title">
+        <h3> Period: </h3>
+      </div>
+      <select id = "type" @onchange="selectNum" v-model = "selected">
+        <option disabled value="">Please select one</option>
+        <option value="day">By Day</option>
+        <option value="month">By Month</option>
+        <option value="year">By Year</option>
+      </select>
+    </div>
 
-    <select id = "metric" @onchange="selectNum" v-model = "selected1">
-      <option disabled value="">Please select one</option>
-      <option value="Electricity">Electricity</option>
-      <option value="Water">Water</option>
-      <option value="Carbon">Carbon</option>
-      
-    </select>
-    <span>Selected: {{ selected1 }}</span>
+    <div id = "options">
+      <div id = "title">
+        <h3> Metric :</h3>
+      </div>
+      <select id = "metric" @onchange="selectNum" v-model = "selected1">
+        <option disabled value="">Please select one</option>
+        <option value="elecUsage">Electricity</option>
+        <option value="waterUsage">Water</option>
+        <option value="carbonUsage">Carbon</option>
+      </select>
+    </div>
 
-    <select id = "dept" @onchange="selectNum" v-model = "selected2">
-      <option disabled value="">Please select one</option>
-      <option value="Finance">Finance</option>
-      <option value="HR">HR</option>  
-    </select>
-    <span>Selected: {{ selected2 }}</span>
-    <button id = "savebutton" type = "button" v-on:click="graphData(this.user)">Save</button>
-    <line-chart :data="this.dataSet"></line-chart>
-    <section class = "w-full flex justify-center">
-        <div @click="refresh" class = "border-2 px-3 py-1 mt-6 cursor-pointer">refresh</div>
-    </section>
+    <button id = "savebutton" type = "button" v-on:click="graphData(this.user)">Go</button>
+    <line-chart :data="this.dataList"></line-chart>
+    
   </div>
 </template>
 
@@ -53,6 +52,7 @@ export default {
       selected1: '',
       selected2: '',
       dataSet: {},
+      dataList: []
     }
   },
 
@@ -67,41 +67,139 @@ export default {
 
   //idea is to have a go button to refresh the page which are going to have new values
   methods: {
-    refresh(){
-        window.location.reload()
-    },
+    
 
     async graphData(user) {
+      //get realtime year and month
+      const currentDate = new Date();
+      const currentMonth = "0" + (currentDate.getMonth() + 1);
+      //to change when anthony inputs 2022 data
+      const currentYear = currentDate.getFullYear();
+      //const currentYear = "2019"
+      console.log("CURRENT YEAR: " + currentYear);
+      
       var uid = user.uid
-      console.log(uid)
+      //console.log("UID: " + uid)
       var selectType = document.getElementById('type');
       var valueType = selectType.options[selectType.selectedIndex].value;
       var selectMetric = document.getElementById('metric');
       var valueMetric = selectMetric.options[selectMetric.selectedIndex].value;
-      var selectDept = document.getElementById('dept');
-      var valueDept = selectDept.options[selectDept.selectedIndex].value;
-      //change "RcKRjeuP7ybC3KxJsDBthyQrDlI3" to uid
-      var dataRef = valueDept + valueType + valueMetric //RcKRjeuP7ybC3KxJsDBthyQrDlI3" + valueDept + valueYear + valueMonth
-      console.log(dataRef)
-      //include dropdown option for collection
-      const z = await getDoc(doc(db, "elecUsageDaily", dataRef))
-      usage = z.data()
+      //var selectDept = document.getElementById('dept');
+      //var valueDept = selectDept.options[selectDept.selectedIndex].value;
+
+      var graphData = []
+
+      if (valueType == "day") {
+        this.dataList = []
+        const collectionName = valueMetric + "Daily";
+        //console.log("COLLECTION: " + collectionName);
+        var departments = await getDoc(doc(db, "depts", uid));
+        var departmentsData = departments.data();
       
-      const objectArray = Object.entries(usage);
+        //change "RcKRjeuP7ybC3KxJsDBthyQrDlI3" to uid and "2018" to currYear
+        //var dataRef = uid + valueDept + currentYear + currentMonth
+        //test code 
+        for (const [dept, bool] of Object.entries(departmentsData)) {
+          console.log(bool)
+          var dataRef = uid + dept + currentYear + currentMonth
+          //console.log("DAY DATAREF :" + dataRef)
+          const z = await getDoc(doc(db, collectionName, dataRef));
+          usage = z.data();
+          const objectArray = Object.entries(usage);
+          //console.log(objectArray)
+          var sortedArray = objectArray.sort(function(a, b) { return a[0] - b[0]; });
+          //this.dataSet = sortedArray;
 
-      objectArray.forEach(([key, value]) => {
-        console.log(key); 
-        console.log(value); 
-      });
+          for (var i = 0; i < sortedArray.length; i++) {
+            const key = sortedArray[i][0]
+            const keyString = key.toString()
+            sortedArray[i][0] = keyString
+          }
+          
+          const temp = {"name": dept, data: sortedArray};
+          graphData.push(temp);
+      
+        }
+        this.dataList = graphData
+      } else if (valueType == "month") {
+        this.dataList = []
+        const collectionName = valueMetric + "Mthly";
+        //console.log("COLLECTION: " + collectionName);
+        var departments1 = await getDoc(doc(db, "depts", uid));
+        var departmentsData1 = departments1.data();
+      
+        //change "RcKRjeuP7ybC3KxJsDBthyQrDlI3" to uid and "2018" to currYear
+        //var dataRef = uid + valueDept + currentYear + currentMonth
+        //test code 
+        for (const [dept, bool] of Object.entries(departmentsData1)) {
+          console.log(bool)
+          var dataRef1 = uid + dept + currentYear
+          console.log("DAY DATAREF :" + dataRef1)
+          const z = await getDoc(doc(db, collectionName, dataRef1));
+          usage = z.data();
+          console.log(usage)
+          const objectArray = Object.entries(usage);
+          //console.log(objectArray)
+          var sortedArray1 = objectArray.sort(function(a, b) { return a[0] - b[0]; });
+          //this.dataSet = sortedArray;
 
-      var sortedArray = objectArray.sort(function(a, b) { return a[0] - b[0]; });
+          for (var ii = 0; ii < sortedArray1.length; ii++) {
+            const key = sortedArray1[ii][0]
+            const keyString = key.toString()
+            sortedArray1[ii][0] = keyString
+          }
+          
+          const temp = {"name": dept, data: sortedArray1};
+          graphData.push(temp);
+      
+        }
+        this.dataList = graphData
+      } else if (valueType == "year") {
+        this.dataList = []
+        const collectionName = valueMetric + "Yrly";
+        //console.log("COLLECTION: " + collectionName);
+        var departments2 = await getDoc(doc(db, "depts", uid));
+        var departmentsData2 = departments2.data();
+      
+        //change "RcKRjeuP7ybC3KxJsDBthyQrDlI3" to uid and "2018" to currYear
+        //var dataRef = uid + valueDept + currentYear + currentMonth
+        //test code 
+        for (const [dept, bool] of Object.entries(departmentsData2)) {
+          console.log(bool)
+          var dataRef2 = uid + dept
+          //console.log("DAY DATAREF :" + dataRef)
+          const z = await getDoc(doc(db, collectionName, dataRef2));
+          usage = z.data();
+          const objectArray = Object.entries(usage);
+          //console.log(objectArray)
+          var sortedArray2 = objectArray.sort(function(a, b) { return a[0] - b[0]; });
+          //this.dataSet = sortedArray;
 
-
-      console.log(sortedArray)
-      this.dataSet = sortedArray;
-    }
+          for (var iii = 0; iii < sortedArray2.length; iii++) {
+            const key = sortedArray2[iii][0]
+            const keyString = key.toString()
+            sortedArray2[iii][0] = keyString
+          }
+          
+          const temp = {"name": dept, data: sortedArray2};
+          graphData.push(temp);
+      
+        }
+        this.dataList = graphData
+      }
+      }
   }
 };
 </script>
 
-<style></style>
+<style>
+#options {
+  display: inline-block;
+  margin-left: 5em;
+}
+
+#title {
+  display: inline-block;
+  margin-right: 0.5em;
+}
+</style>

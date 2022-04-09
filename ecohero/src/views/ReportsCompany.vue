@@ -2,7 +2,7 @@
   <TopBar />
   <div v-if= "user">
     <!-- Add stuff here -->
-    This is our Reports Page
+    <h1>Reports at Company Level</h1>
   </div>
   <ChartCompany/>
   <BottomBar />
