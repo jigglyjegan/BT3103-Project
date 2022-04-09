@@ -5,19 +5,22 @@
     This is our Reports Page
   </div>
   <Chart/>
-  <BottomBar />
+  <Footer />
+  <Logout/>
 </template>
 
 <script>
 import { getAuth, onAuthStateChanged } from "firebase/auth";
-import BottomBar from "@/components/BottomBar.vue";
+import Logout from "@/components/Logout.vue"
+import Footer from "@/components/Footer.vue"
 import TopBar from "@/components/TopBar.vue";
 import Chart from "@/components/Chart.vue";
 
 
 export default {
   components: {
-    BottomBar,
+    Footer,
+    Logout,
     TopBar,
     Chart
   },

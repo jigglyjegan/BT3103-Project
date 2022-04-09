@@ -1,21 +1,32 @@
 <template>
   <TopBar />
   <AboutApp />
-  <BottomBar />
+  <Mission/>
+  <Team/>
+  <Footer/>
+  <Logout/>
+
 </template>
 
 <script>
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import AboutApp from "@/components/AboutApp.vue";
-import BottomBar from "@/components/BottomBar.vue";
 import TopBar from "@/components/TopBar.vue";
+import Mission from "@/components/Mission.vue"
+import Footer from "@/components/Footer.vue"
+import Logout from "@/components/Logout.vue"
+import Team from "@/components/Team.vue"
 
 export default {
   name: "About",
   components: {
-    BottomBar,
     AboutApp,
     TopBar,
+    Logout,
+    Mission,
+    Footer,
+    Team,
+
   },
 
   data() {

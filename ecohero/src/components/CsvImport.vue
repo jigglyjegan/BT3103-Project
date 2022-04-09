@@ -1,5 +1,7 @@
 <template>
   <div v-if="user">
+    <h2>Upload your data here</h2>
+    <p>Please upload your data in CSV format here</p>
     <form id="uploadForm">
       <input type="file" id="inputFile" accept=".csv" placeholder="Upload File Here"/>
       <button id="savebutton" type="button" v-on:click="uploadFile()">

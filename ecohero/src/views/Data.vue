@@ -3,18 +3,21 @@
   <div v-if= "user">
     <CsvImport/>
   </div>
-  <BottomBar />
+  <Footer />
+  <Logout/>
 </template>
 
 <script>
 import { getAuth, onAuthStateChanged } from "firebase/auth";
-import BottomBar from "@/components/BottomBar.vue";
+import Logout from "@/components/Logout.vue"
+import Footer from "@/components/Footer.vue"
 import TopBar from "@/components/TopBar.vue";
 import CsvImport from '@/components/CsvImport.vue';
 
 export default {
   components: {
-    BottomBar,
+    Logout,
+    Footer,
     TopBar,
     CsvImport,
   },
