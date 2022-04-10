@@ -59,7 +59,7 @@ export default {
                 monthName = String(month)
             }
             console.log("month:" + monthName)
-            const year = 2020 //date.getFullYear()
+            const year = date.getFullYear()
 
             var userThreshold = await getDoc(doc(db, "/limits", uid))
             if (userThreshold.exists()){
