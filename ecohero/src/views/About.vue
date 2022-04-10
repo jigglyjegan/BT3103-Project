@@ -1,6 +1,8 @@
 <template>
-  <TopBar />
+  <NewTopBar />
   <AboutApp />
+  <img src="../assets/ecohero.png" alt="" class="logo">
+
   <Mission/>
   <Team/>
   <Footer/>
@@ -11,7 +13,7 @@
 <script>
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import AboutApp from "@/components/AboutApp.vue";
-import TopBar from "@/components/TopBar.vue";
+import NewTopBar from "@/components/NewTopBar.vue";
 import Mission from "@/components/Mission.vue"
 import Footer from "@/components/Footer.vue"
 import Logout from "@/components/Logout.vue"
@@ -21,7 +23,7 @@ export default {
   name: "About",
   components: {
     AboutApp,
-    TopBar,
+    NewTopBar,
     Logout,
     Mission,
     Footer,
@@ -45,3 +47,12 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+  .logo{
+    display: block;
+    width: 25%;
+    margin-left: auto;
+    margin-right:auto;
+  }
+</style>

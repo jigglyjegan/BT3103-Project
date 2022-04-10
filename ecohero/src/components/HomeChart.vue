@@ -50,9 +50,16 @@ export default {
         async graphData(user) {
             var uid = user.uid
             console.log(uid)
-            const month = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
             const date = new Date()
-            var monthName = month[date.getMonth()]
+            var month = date.getMonth() + 1
+            if (month < 10){
+                console.log("here")
+                var monthName = String(month).padStart(2,'0')
+            }
+            else {
+                monthName = String(month)
+            }
+            console.log("month:" + monthName)
             const year = date.getFullYear()
 
             var userThreshold = await getDoc(doc(db, "/limits", uid));
@@ -66,14 +73,20 @@ export default {
             console.log(electricityThresholdValue)
 
             var dataRef1 = uid + "Finance" + year;
-            var dataRef2 = uid + "HR" + year 
+            var dataRef2 = uid + "IT" + year 
+            var dataRef3 = uid + "Logistics" + year
 
             var electricityFinance = await getDoc(doc(db, "/elecUsageMthly",dataRef1))
-            var electricityHR = await getDoc(doc(db, "/elecUsageMthly",dataRef2))
+            var electricityIT = await getDoc(doc(db, "/elecUsageMthly",dataRef2))
+            var electricityLogistics = await getDoc(doc(db, "/elecUsageMthly",dataRef3))
             var electricityFinanceValue = electricityFinance.data()
             console.log(electricityFinanceValue)
-            var electricityHRValue = electricityHR.data()
-            var thisMonthElectric = electricityFinanceValue[String(monthName)] + electricityHRValue[String(monthName)]
+            var electricityITValue = electricityIT.data()
+            console.log(electricityITValue)
+            var electrictyLogisticsValue = electricityLogistics.data()
+            console.log(electrictyLogisticsValue)
+            var thisMonthElectric = 
+            electricityFinanceValue[monthName] + electricityITValue[monthName] + electrictyLogisticsValue[monthName]
             console.log(thisMonthElectric)
             if (electricityThresholdValue - thisMonthElectric <= 0 ){
                 this.dataElectric = {'Used': thisMonthElectric, 'Left': 0}
@@ -83,11 +96,15 @@ export default {
             }
 
             var waterFinance = await getDoc(doc(db, "/waterUsageMthly",dataRef1))
-            var waterHR = await getDoc(doc(db, "/waterUsageMthly",dataRef2))
+            var waterIT = await getDoc(doc(db, "/waterUsageMthly",dataRef2))
+            var waterLogistics = await getDoc(doc(db, "/waterUsageMthly",dataRef3))
             var waterFinanceValue = waterFinance.data()
             console.log(waterFinanceValue)
-            var waterHRValue = waterHR.data()
-            var thisMonthWater = waterFinanceValue[String(monthName)] + waterHRValue[String(monthName)]
+            var waterITValue = waterIT.data()
+            console.log(waterITValue)
+            var waterLogisticsValue = waterLogistics.data()
+            console.log(waterLogisticsValue)
+            var thisMonthWater = waterFinanceValue[monthName] + waterITValue[monthName] + waterLogisticsValue[monthName]
             console.log(thisMonthWater)
             if (waterThresholdValue - thisMonthWater <= 0 ){
                 this.dataWater = {'Used': thisMonthWater, 'Left': 0}
@@ -97,12 +114,16 @@ export default {
             }
 
 
-            var carbonFinance = await getDoc(doc(db, "/carbonUsageMthly",dataRef1))
-            var carbonHR = await getDoc(doc(db, "/carbonUsageMthly",dataRef2))
+           var carbonFinance = await getDoc(doc(db, "/carbonUsageMthly",dataRef1))
+            var carbonIT = await getDoc(doc(db, "/carbonUsageMthly",dataRef2))
+            var carbonLogistics = await getDoc(doc(db, "/carbonUsageMthly",dataRef3))
             var carbonFinanceValue = carbonFinance.data()
             console.log(carbonFinanceValue)
-            var carbonHRValue = carbonHR.data()
-            var thisMonthCarbon = carbonFinanceValue[String(monthName)] + carbonHRValue[String(monthName)]
+            var carbonITValue = carbonIT.data()
+            console.log(carbonITValue)
+            var carbonLogisticsValue = carbonLogistics.data()
+            console.log(carbonLogisticsValue)
+            var thisMonthCarbon = carbonFinanceValue[monthName] + carbonITValue[monthName] + carbonLogisticsValue[monthName]
             console.log(thisMonthCarbon)
            if (carbonThresholdValue - thisMonthCarbon <= 0 ){
                 this.dataCarbon = {'Used': thisMonthCarbon, 'Left': 0}

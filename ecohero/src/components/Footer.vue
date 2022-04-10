@@ -21,7 +21,7 @@
         <br /><br />
         <span><i class="fab fa-instagram"></i></span>
         <a href="https://www.instagram.com/ecoheroofficial/"
-          ><b><span class="padd">Follow us on Instagram!</span></b></a
+          class = "link"><b><span class="padd">Follow us on Instagram!</span></b></a
         >
     
     </div>
@@ -53,6 +53,9 @@ span.padd {
   border: 1px ;
   padding: 1rem 1rem;
   vertical-align: middle;
+}
+.link{
+  color: darkslategray
 }
 
 

@@ -14,22 +14,27 @@
 // Note: DO NOT MODIFY THIS FILE.
 
 <template>
-   <form id="userForm">
-      <h1 class="headerDiv">Change Password</h1>
-      <input type="text" id="email" required="" placeholder="Email" />
-      <br /><br />
+  <div class="container" >
+    <NewTopBar/>
+    <form id="userForm">
+        <h1 class="headerDiv">Change Password</h1>
+        <input type="text" id="email" required="" placeholder="Email" />
+        <br /><br />
 
-      <input type="text" id="pwd" required="" placeholder="Old Password" />
-      <br /><br />
+        <input type="text" id="pwd" required="" placeholder="Old Password" />
+        <br /><br />
 
-      <input type="text" id="newPwd" required="" placeholder="New Password" />
-      <br /><br />
+        <input type="text" id="newPwd" required="" placeholder="New Password" />
+        <br /><br />
 
-      <button id="change" type="button" v-on:click="changePass()">
-        Change Password
-      </button>
-      <br /><br />
-    </form>
+        <button id="change" type="button" v-on:click="changePass()">
+          Change Password
+        </button>
+        <br /><br />
+      </form>
+      <Footer/>
+      <Logout/>
+    </div>
 
 
 </template>
@@ -37,9 +42,17 @@
 <script>
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import firebase from "@/uifire.js";
+import Logout from "@/components/Logout.vue"
+import Footer from "@/components/Footer.vue"
+import NewTopBar from '@/components/NewTopBar.vue'
 
 
 export default {
+  components:{
+    NewTopBar,
+    Logout,
+    Footer
+  },
   data() {
     return {
       user: false,
@@ -47,6 +60,7 @@ export default {
       correctCredential: false
     };
   },
+
 
   mounted() {
     const auth = getAuth();
@@ -92,4 +106,9 @@ export default {
 </script>
 
 <style>
+  #container{
+    color: white;
+  }
+ 
+
 </style>
