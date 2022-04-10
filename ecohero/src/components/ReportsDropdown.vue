@@ -14,9 +14,7 @@
                     <div class="menu-item">
                         <router-link to="/reportsCompany">Company Level</router-link>
                     </div>
-                    <div class="menu-item">
-                        <router-link to="/reports">Custom</router-link>
-                    </div>
+                
                    <!-- <div class="menu-item">
                         <Logout ref="customLogout"/>
                         <button id="logout" @click="runLogout">Logout</button>

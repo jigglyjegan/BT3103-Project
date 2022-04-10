@@ -2,6 +2,7 @@
     <div class="big-image">
         <div class="overlay">
           <h1>EcoHero</h1>
+          <br><br>
           <p>SAVE THE WORLD, SAVE YOUR BILLS.</p>
         </div>
       </div>

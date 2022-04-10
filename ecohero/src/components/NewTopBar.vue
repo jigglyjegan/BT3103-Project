@@ -136,7 +136,7 @@ a {
     font-size:17px;
     color: #FFF;
     position: relative;
-    right: 630px;
+    right: 500px;
     top: 17px;
 }
 
@@ -159,7 +159,7 @@ a {
     color: #FFF;
 	font-size: 17px;
     position: relative;
-    right: 650px;
+    right: 550px;
     
 }
 

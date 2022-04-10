@@ -119,14 +119,27 @@ export default {
       console.log(uid);
 
       var userThreshold = await getDoc(doc(db, "/limits", uid));
-      var userThresholdValue = userThreshold.data() 
-      console.log(userThresholdValue)
-      var carbonThresholdValue = userThresholdValue['carbon']
-      console.log(carbonThresholdValue)
-      var waterThresholdValue = userThresholdValue['water']
-      console.log(waterThresholdValue)
-      var electricityThresholdValue = userThresholdValue['electricity']
-      console.log(electricityThresholdValue)
+       if (userThreshold.exists()){
+        var userThresholdValue = userThreshold.data() 
+        console.log(userThresholdValue)
+        var carbonThresholdValue = userThresholdValue['carbon']
+        console.log(carbonThresholdValue)
+        var waterThresholdValue = userThresholdValue['water']
+        console.log(waterThresholdValue)
+        var electricityThresholdValue = userThresholdValue['electricity']
+        console.log(electricityThresholdValue)
+      } else {
+          setDoc(doc(db, "/limits", uid),{
+            'carbon':0,
+            'water':0,
+            'electricity':0
+            })
+
+            carbonThresholdValue = 0
+            waterThresholdValue = 0
+            electricityThresholdValue = 0
+                
+        }
 
       var dataRef1 = uid + "Finance" + year;
       var dataRef2 = uid + "IT" + year 
