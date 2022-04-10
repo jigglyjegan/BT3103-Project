@@ -1,24 +1,46 @@
 <template>
   <NewTopBar />
   <div v-if= "user">
-    <!-- Add stuff here -->
-    This is our Overview Page
+    <h1>Overview</h1>
+  <div id = "electric">
+    
+  <ElectricOverview/>
+  <ElectricBest/>
   </div>
-  <Footer />
+  <CarbonOverview/>
+  <CarbonBest/>
+  <WaterOverview/> 
+  <WaterBest/>
+  <BottomBar />
   <Logout/>
+  </div>
 </template>
 
 <script>
 import { getAuth, onAuthStateChanged } from "firebase/auth";
-import Footer from "@/components/Footer.vue"
-import Logout from "@/components/Logout.vue"
+import BottomBar from "@/components/BottomBar.vue";
+//import TopBar from "@/components/TopBar.vue";
+import ElectricOverview from "@/components/ElectricOverview.vue";
+import ElectricBest from "@/components/ElectricBest.vue";
 import NewTopBar from "@/components/NewTopBar.vue";
+import CarbonBest from "@/components/CarbonBest.vue";
+import CarbonOverview from "@/components/CarbonOverview.vue";
+import WaterOverview from "@/components/WaterOverview.vue";
+import WaterBest from "@/components/WaterBest.vue";
+import Logout from "@/components/Logout.vue"
+
 
 export default {
   components: {
-    Footer,
-    Logout,
+    BottomBar,
+    ElectricOverview,
+    ElectricBest,
     NewTopBar,
+    CarbonBest,
+    CarbonOverview,
+    WaterOverview,
+    WaterBest,
+    Logout
   },
 
   data() {
@@ -39,4 +61,5 @@ export default {
 </script>
 
 <style>
+
 </style>
