@@ -1,26 +1,68 @@
 <template>
+  <NewTopBar/>
     <div class="big-image">
         <div class="overlay">
           <h1>Contact Us</h1>
-          <p>blahblah</p>
+          <br><br>
+          <p>We will be happy to address any enquiries </p>
+          <br><br>
           <div class="contact-info">
             <div class="card">
               <fa icon = "envelope" />
-              <p>email@domain.com</p>
+              <p>ecohero@gmail.com</p>
             </div>
             <div class="card">
               <fa icon = "phone" />
-              <p>+000000000000</p>
+              <p>+65 6348 4933</p>
             </div>
 
             <div class="card">
               <fa icon = "map-marker-alt"/>
-              <p>New York, USA</p>
+              <p>Computing Dr, Singapore 117417</p>
             </div>
           </div>
         </div>
       </div>
+      <img src="../assets/ecohero.png" alt="" class="logo">
+      <Mission/>
+      <Team/>
+      <Footer/>
 </template>
+
+<script>
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+import NewTopBar from "@/components/NewTopBar.vue";
+import Mission from "@/components/Mission.vue"
+import Footer from "@/components/Footer.vue"
+import Team from "@/components/Team.vue"
+
+export default {
+  name: "About",
+  components: {
+    NewTopBar,
+    Mission,
+    Footer,
+    Team,
+
+  },
+
+  data() {
+    return {
+      user: false,
+    };
+  },
+
+  mounted() {
+    const auth = getAuth();
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        this.user = user;
+      }
+    });
+  },
+};
+
+</script>
 
 <style scoped>
 @import url("https://fonts.googleapis.com/css?family=Roboto&display=swap");
@@ -28,6 +70,13 @@ body {
     margin: 0;
     font-family: "Roboto", sans-serif;
     overflow-x: hidden;
+  }
+
+   .logo{
+    display: block;
+    width: 25%;
+    margin-left: auto;
+    margin-right:auto;
   }
 
   .big-image {
@@ -88,10 +137,10 @@ body{
 
 
 .card{
-  background: #2f3542;
+  background: #254441;
   padding: 0 20px;
   margin: 0 10px;
-  width: calc(33% - 20px);
+  width: calc(33% - 100px);
   height: 200px;
   display: flex;
   flex-direction: column;
@@ -128,6 +177,7 @@ body{
 }
 
 .card:hover p{
+  font-size: 20px;
   max-height: 40px;
   opacity: 1;
 }

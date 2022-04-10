@@ -1,12 +1,14 @@
 <template>
-  <TopBar />
+  <NewTopBar />
   <div style="text-align: center">
-    <h1 id="mainHead">EcoHero</h1>
-    <h2>Fill out our form or register using your Google account below!</h2>
+    <img src="../assets/ecohero.png" alt="" class="logo">
+
+  
 
     <form id="userForm">
       <h1 class="headerDiv">Create Account</h1>
-      <h2 id="caption">Start taking accountability today!</h2>
+      <p>Fill out our form or register using your Google account below!</p>
+      <p id="caption">Start taking accountability today!</p>
       <input type="text" id="name" required="" placeholder="Name" />
       <br /><br />
 
@@ -37,7 +39,7 @@ import "firebase/compat/auth";
 import * as firebaseui from "firebaseui";
 import "firebaseui/dist/firebaseui.css";
 import BottomBar from '@/components/BottomBar.vue';
-import TopBar from '@/components/TopBar.vue';
+import NewTopBar from '@/components/NewTopBar.vue';
 
 
 export default {
@@ -45,7 +47,7 @@ export default {
 
   components: { 
     BottomBar,
-    TopBar 
+    NewTopBar 
   },
   
   methods: {
@@ -104,7 +106,7 @@ export default {
 <style scoped>
 h1 {
   text-align: c;
-  color: aliceblue;
+  
 }
 
 #firebaseui-auth-container {
@@ -114,7 +116,7 @@ h1 {
 
 #mainHead {
   text-align: center;
-  text-shadow: 2px 2px grey;
+ 
 }
 
 #bg {
@@ -124,8 +126,15 @@ h1 {
   width: 60%;
 }
 
-h2 {
+h3 {
   text-align: center;
-  color: aliceblue;
+
 }
+.logo{
+    display: block;
+    width: 25%;
+    margin-left: auto;
+    margin-right:auto;
+  }
+
 </style>

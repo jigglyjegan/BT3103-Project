@@ -2,7 +2,7 @@
   <div v-if= "user">
     <div id ="options">
       <div id = "title">
-        <h3> Period: </h3>
+        <h3 style = "color: black"> Period: </h3>
       </div>
       <select id = "type" @onchange="selectNum" v-model = "selected">
         <option disabled value="">Please select one</option>
@@ -14,7 +14,7 @@
 
     <div id = "options">
       <div id = "title">
-        <h3> Metric :</h3>
+        <h3 style = "color: black"> Metric :</h3>
       </div>
       <select id = "metric" @onchange="selectNum" v-model = "selected1">
         <option disabled value="">Please select one</option>
@@ -196,10 +196,12 @@ export default {
 #options {
   display: inline-block;
   margin-left: 5em;
+  color: black;
 }
 
 #title {
   display: inline-block;
   margin-right: 0.5em;
+  color: black;
 }
 </style>
