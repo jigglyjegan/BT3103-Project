@@ -1,8 +1,6 @@
 <template>
   <div class="about">
-    <img id="logo" src="../assets/ecohero.png" alt="">
-
-    <h1 class="about-segment">About Us</h1>
+    <h1 class="about-segment">What is EcoHero</h1>
     <p> EcoHero aims to tackle the issue of climate change by provding a platform for 
         companies to track and view their carbon emissions, water usage and electric usage 
         in a convenient manner from which they can take tangible action.
@@ -53,8 +51,11 @@ export default {
   margin: 50px 0;
 }
 #logo{
-    height: 250px;
-    width: 250px;
-}
+    display: block;
+    width: 50%;
+    margin-left: auto;
+    margin-right:auto;
+    
+    }
 
 </style>

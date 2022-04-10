@@ -79,7 +79,6 @@ export default {
 <style scoped>
 h1 {
   text-align: c;
-  color: aliceblue;
 }
 
 #firebaseui-auth-container {

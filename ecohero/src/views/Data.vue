@@ -1,5 +1,5 @@
 <template>
-  <TopBar />
+  <NewTopBar />
   <div v-if= "user">
     <CsvImport/>
   </div>
@@ -11,14 +11,14 @@
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import Logout from "@/components/Logout.vue"
 import Footer from "@/components/Footer.vue"
-import TopBar from "@/components/TopBar.vue";
+import NewTopBar from "@/components/NewTopBar.vue";
 import CsvImport from '@/components/CsvImport.vue';
 
 export default {
   components: {
     Logout,
     Footer,
-    TopBar,
+    NewTopBar,
     CsvImport,
   },
 

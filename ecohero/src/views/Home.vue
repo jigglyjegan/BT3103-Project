@@ -1,7 +1,7 @@
 <template>
-  <TopBar />
+  <NewTopBar />
   <Welcome />
-  <img src="../assets/ecohero.png" alt="">
+  <img src="../assets/ecohero.png" alt="" class="logo">
   <!--<GetStarted />-->
   <HomeChart/>
   <Footer/>
@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import TopBar from '@/components/TopBar.vue'
+import NewTopBar from '@/components/NewTopBar.vue'
 import Welcome from "@/components/Welcome.vue";
 //import GetStarted from "@/components/GetStarted.vue";
 //import BottomBar from "@/components/BottomBar.vue";
@@ -23,10 +23,19 @@ export default {
     Welcome,
    // GetStarted,
    // BottomBar,
-    TopBar,
+    NewTopBar,
     Logout,
     Footer,
     HomeChart
   },
 };
 </script>
+
+<style scoped>
+  .logo{
+    display: block;
+    width: 25%;
+    margin-left: auto;
+    margin-right:auto;
+  }
+</style>

@@ -1,5 +1,5 @@
 <template>
-  <TopBar />
+  <NewTopBar />
   <div v-if= "user">
     <!-- Add stuff here -->
     This is our Overview Page
@@ -12,13 +12,13 @@
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import Footer from "@/components/Footer.vue"
 import Logout from "@/components/Logout.vue"
-import TopBar from "@/components/TopBar.vue";
+import NewTopBar from "@/components/NewTopBar.vue";
 
 export default {
   components: {
     Footer,
     Logout,
-    TopBar,
+    NewTopBar,
   },
 
   data() {

@@ -1,25 +1,28 @@
 <template>
-  <TopBar />
+  <NewTopBar />
   <div v-if= "user">
     <!-- Add stuff here -->
     <h1> Reports at Department Level </h1>
   </div>
   <ChartDepartment/>
-  <BottomBar />
+  <Footer/>
+  <Logout/>
 </template>
 
 <script>
 import { getAuth, onAuthStateChanged } from "firebase/auth";
-import BottomBar from "@/components/BottomBar.vue";
-import TopBar from "@/components/TopBar.vue";
+import NewTopBar from "@/components/NewTopBar.vue";
 import ChartDepartment from "@/components/ChartDepartment.vue";
+import Logout from "@/components/Logout.vue"
+import Footer from "@/components/Footer.vue"
 
 
 export default {
   components: {
-    BottomBar,
-    TopBar,
-    ChartDepartment
+    Footer,
+    NewTopBar,
+    ChartDepartment,
+    Logout
   },
 
   data() {

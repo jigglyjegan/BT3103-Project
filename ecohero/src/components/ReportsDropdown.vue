@@ -1,4 +1,3 @@
-
 <template>
   <div>
       <div class = "menu" @click="isOpen = !isOpen">
@@ -10,10 +9,13 @@
             <transition name="fade" appear>
                 <div class = "sub-menu" v-if="isOpen">
                     <div class="menu-item">
-                        <router-link to="/ChangePass">Change Password</router-link>
+                        <router-link to="/reportsDepartment">Department Level</router-link>
                     </div>
                     <div class="menu-item">
-                        <router-link to="/ChangeLimit">Change Limits</router-link>
+                        <router-link to="/reportsCompany">Company Level</router-link>
+                    </div>
+                    <div class="menu-item">
+                        <router-link to="/reports">Custom</router-link>
                     </div>
                    <!-- <div class="menu-item">
                         <Logout ref="customLogout"/>
