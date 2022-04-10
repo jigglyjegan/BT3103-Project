@@ -26,14 +26,12 @@
       <img src="../assets/ecohero.png" alt="" class="logo">
       <Mission/>
       <Team/>
-      <Footer/>
 </template>
 
 <script>
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import NewTopBar from "@/components/NewTopBar.vue";
 import Mission from "@/components/Mission.vue"
-import Footer from "@/components/Footer.vue"
 import Team from "@/components/Team.vue"
 
 export default {
@@ -41,7 +39,6 @@ export default {
   components: {
     NewTopBar,
     Mission,
-    Footer,
     Team,
 
   },

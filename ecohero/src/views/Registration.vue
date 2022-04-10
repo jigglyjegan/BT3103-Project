@@ -29,7 +29,7 @@
 
     <div id="firebaseui-auth-container"></div>
   </div>
-  <BottomBar />
+  <Footer />
 </template>
 
 <script>
@@ -38,16 +38,16 @@ import { getAuth, createUserWithEmailAndPassword, updateProfile } from "firebase
 import "firebase/compat/auth";
 import * as firebaseui from "firebaseui";
 import "firebaseui/dist/firebaseui.css";
-import BottomBar from '@/components/BottomBar.vue';
 import NewTopBar from '@/components/NewTopBar.vue';
+import Footer from "@/components/Footer.vue"
 
 
 export default {
   name: "Registration",
 
   components: { 
-    BottomBar,
-    NewTopBar 
+    NewTopBar,
+    Footer
   },
   
   methods: {
