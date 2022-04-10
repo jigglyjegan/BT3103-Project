@@ -141,7 +141,59 @@ export default {
                 
         }
 
-      var dataRef1 = uid + "Finance" + year;
+    
+        var userDepartments = await getDoc(doc(db, "/depts", uid))
+          if (userDepartments.exists()){
+            var userDepartmentsData = userDepartments.data()
+            var deptArray = []
+            var thisMonthCarbon = 0;
+            var thisMonthWater = 0;
+            var thisMonthElectric = 0;
+            for (var deptKey in userDepartmentsData){
+              deptArray.push(deptKey)
+              }
+            console.log(deptArray)
+            for (const dept of deptArray){
+              console.log(dept)
+              var dataRef = uid + String(dept) + year
+              console.log(dataRef)
+              var deptWater = await getDoc(doc(db, "/waterUsageMthly",dataRef))
+              var deptCarbon = await getDoc(doc(db, "/carbonUsageMthly",dataRef))
+              var deptElectricity = await getDoc(doc(db, "/elecUsageMthly",dataRef))
+              var deptWaterValue = deptWater.data()
+              var deptCarbonValue = deptCarbon.data()
+              var deptElectricityValue = deptElectricity.data()
+              console.log(deptWaterValue)
+              console.log(deptCarbonValue)
+              console.log(deptElectricityValue)
+              thisMonthCarbon += deptCarbonValue[monthName];
+              thisMonthElectric += deptElectricityValue[monthName];
+              thisMonthWater += deptWaterValue[monthName];
+              }
+              if(waterThresholdValue < thisMonthWater){
+                alert("You have exceeded your water usage limit")
+                notExceededAny = false
+              }
+              if(carbonThresholdValue < thisMonthCarbon){
+                alert("You have exceeded your carbon emissions limit")
+                notExceededAny = false
+              }
+              if(electricityThresholdValue < thisMonthElectric){
+                alert("You have exceeded your electricity usage limit")
+                notExceededAny = false
+              }
+
+              if(notExceededAny){
+                alert("No metrics exceeded")
+              }
+
+            } else{
+                alert("you have no data!")
+            }  
+      
+
+
+      /*var dataRef1 = uid + "Finance" + year;
       var dataRef2 = uid + "IT" + year 
       var dataRef3 = uid + "Logistics" + year
 
@@ -197,7 +249,7 @@ export default {
 
       if(notExceededAny){
         alert("No metrics exceeded")
-      }
+      }*/
 
     }
 

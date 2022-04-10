@@ -82,11 +82,65 @@ export default {
                 waterThresholdValue = 0
                 electricityThresholdValue = 0
 
-
-
             }
 
-            var dataRef1 = uid + "Finance" + year;
+            var userDepartments = await getDoc(doc(db, "/depts", uid))
+            if (userDepartments.exists()){
+                var userDepartmentsData = userDepartments.data()
+                var deptArray = []
+                var thisMonthCarbon = 0;
+                var thisMonthWater = 0;
+                var thisMonthElectric = 0;
+                for (var deptKey in userDepartmentsData){
+                    deptArray.push(deptKey)
+                }
+                console.log(deptArray)
+                for (const dept of deptArray){
+                    console.log(dept)
+                    var dataRef = uid + String(dept) + year
+                    console.log(dataRef)
+                    var deptWater = await getDoc(doc(db, "/waterUsageMthly",dataRef))
+                    var deptCarbon = await getDoc(doc(db, "/carbonUsageMthly",dataRef))
+                    var deptElectricity = await getDoc(doc(db, "/elecUsageMthly",dataRef))
+                    var deptWaterValue = deptWater.data()
+                    var deptCarbonValue = deptCarbon.data()
+                    var deptElectricityValue = deptElectricity.data()
+                    console.log(deptWaterValue)
+                    console.log(deptCarbonValue)
+                    console.log(deptElectricityValue)
+                    thisMonthCarbon += deptCarbonValue[monthName];
+                    thisMonthElectric += deptElectricityValue[monthName];
+                    thisMonthWater += deptWaterValue[monthName];
+                }
+                    if (electricityThresholdValue - thisMonthElectric <= 0 ){
+                        this.dataElectric = {'Used': thisMonthElectric, 'Left': 0}
+                    } else {
+                    this.dataElectric = {'Used': thisMonthElectric, 'Left': electricityThresholdValue - thisMonthElectric}
+                    }
+
+                    if (waterThresholdValue - thisMonthWater <= 0 ){
+                        this.dataWater = {'Used': thisMonthWater, 'Left': 0}
+                    }
+                    else{
+                        this.dataWater = {'Used': thisMonthWater, 'Left': waterThresholdValue - thisMonthWater}
+                    }
+
+                    if (carbonThresholdValue - thisMonthCarbon <= 0 ){
+                        this.dataCarbon = {'Used': thisMonthCarbon, 'Left': 0}
+                    }
+                    else{
+                        this.dataCarbon = {'Used': thisMonthCarbon, 'Left': carbonThresholdValue - thisMonthCarbon}
+                    }
+                
+            } else{
+                alert("you have no data!")
+            }
+
+
+
+
+
+            /*var dataRef1 = uid + "Finance" + year;
             var dataRef2 = uid + "IT" + year 
             var dataRef3 = uid + "Logistics" + year
 
@@ -144,7 +198,7 @@ export default {
             }
             else{
                 this.dataCarbon = {'Used': thisMonthCarbon, 'Left': carbonThresholdValue - thisMonthCarbon}
-            }
+            }*/
 
         }
     }
