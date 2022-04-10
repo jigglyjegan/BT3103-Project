@@ -29,7 +29,6 @@
                           <li><div class="reports">
                             <ReportsDropdown title = "Reports" :items="account"/> 
                         </div></li>
-                        <li><router-link to="/changeLimit"> Set Thresholds </router-link></li>
                       
                     </div>
                 </div>
@@ -136,7 +135,7 @@ a {
     font-size:17px;
     color: #FFF;
     position: relative;
-    right: 500px;
+    right: 950px;
     top: 17px;
 }
 
@@ -159,7 +158,7 @@ a {
     color: #FFF;
 	font-size: 17px;
     position: relative;
-    right: 550px;
+    right: 1000px;
     
 }
 
