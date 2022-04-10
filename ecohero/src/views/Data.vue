@@ -2,6 +2,8 @@
   <NewTopBar />
   <div v-if= "user">
     <CsvImport/>
+    <br><br>
+    <a href="https://drive.google.com/file/d/1ro7umGutenqv7A25YLoHTb-qDAtZF1sE/view?usp=sharing" class="link">Click here for template file</a>
   </div>
   <Footer />
   <Logout/>
@@ -40,4 +42,9 @@ export default {
 </script>
 
 <style>
+.link{
+  font-size: 17px;
+  color: skyblue
+}
+
 </style>
