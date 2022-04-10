@@ -134,8 +134,8 @@ async function updateMthYr(uid, years, mths, depts) {
         var eMth = 0
         var wMth = 0
         for (var ckey in cData.data()){
-          console.log('k: ', ckey)
-          console.log('v: ', cData.data()[ckey])
+          // console.log('k: ', ckey)
+          // console.log('v: ', cData.data()[ckey])
           cMth += cData.data()[ckey]
         }
         for (var ekey in eData.data()){

@@ -119,22 +119,22 @@ export default {
       var valueMetric = selectMetric.options[selectMetric.selectedIndex].value + "Daily";
       //change "RcKRjeuP7ybC3KxJsDBthyQrDlI3" to uid
       var dataRef = uid + valueDept + valueYear + valueMonth
-      console.log(dataRef)
+      // console.log(dataRef)
       //include dropdown option for collection
       const z = await getDoc(doc(db, valueMetric, dataRef))
       usage = z.data()
       
       const objectArray = Object.entries(usage);
 
-      objectArray.forEach(([key, value]) => {
-        console.log(key); 
-        console.log(value); 
-      });
+      // objectArray.forEach(([key, value]) => {
+      //   console.log(key); 
+      //   console.log(value); 
+      // });
 
       var sortedArray = objectArray.sort(function(a, b) { return a[0] - b[0]; });
 
 
-      console.log(sortedArray)
+      // console.log(sortedArray)
       this.dataSet = sortedArray;
     }
   }
