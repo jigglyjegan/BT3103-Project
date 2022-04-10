@@ -1,5 +1,5 @@
 <template>
-  <TopBar />
+  <NewTopBar />
   <div style="text-align: center">
     <form id="userForm">
       <h1 class="headerDiv">Sign in to EcoHero</h1>
@@ -17,6 +17,7 @@
     <div id="firebaseui-auth-container"></div>
   </div>
   <!--<BottomBar />-->
+  <Footer/>
 </template>
 
 <script>
@@ -26,14 +27,16 @@ import "firebase/compat/auth";
 import * as firebaseui from "firebaseui";
 import "firebaseui/dist/firebaseui.css";
 //import BottomBar from "@/components/BottomBar.vue";
-import TopBar from "@/components/TopBar.vue";
+import NewTopBar from "@/components/NewTopBar.vue";
+import Footer from "@/components/Footer.vue"
 
 export default {
   name: "Login",
 
   components: {
     //BottomBar,
-    TopBar,
+    NewTopBar,
+    Footer
   },
 
   methods: {

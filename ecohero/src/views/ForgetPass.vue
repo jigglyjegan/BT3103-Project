@@ -14,7 +14,7 @@
 // Note: DO NOT MODIFY THIS FILE.
 
 <template>
-  <div>This is our forget password page</div>
+  <NewTopBar/>
    <div style="text-align: center">
     <form id="userForm">
       <h1 class="headerDiv">Reset Password</h1>
@@ -28,13 +28,22 @@
     </form>
     <div id="firebaseui-auth-container"></div>
   </div>
+  <Footer/>
 </template>
 
 <script>
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import firebase from "@/uifire.js";
+import Footer from "@/components/Footer.vue"
+import NewTopBar from '@/components/NewTopBar.vue'
+
+
 
 export default {
+  components:{
+    NewTopBar,
+    Footer
+  },
   data() {
     return {
       user: false,
