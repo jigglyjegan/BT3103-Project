@@ -4,7 +4,7 @@
       <div class="card">
               <fa icon = "faucet-drip" />
       </div>
-    <line-chart :data="this.dataSet" xtitle="Year"  ytitle="Water Consumption (gallons) "></line-chart>
+    <line-chart :data="this.dataSet" xtitle="Year"  ytitle="Water Consumption (m3) "></line-chart>
     
   </div>
 </template>

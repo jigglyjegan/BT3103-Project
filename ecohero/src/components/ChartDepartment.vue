@@ -25,7 +25,7 @@
     </div>
 
     <button id = "savebutton" type = "button" v-on:click="graphData(this.user)">Go</button>
-    <line-chart :data="this.dataList"></line-chart>
+    <line-chart :data="this.dataList" ></line-chart>
     
   </div>
 </template>

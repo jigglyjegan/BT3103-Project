@@ -4,7 +4,7 @@
       <div class="card">
               <fa icon = "faucet-drip" />
       </div>
-    <column-chart :data="this.dataSet"  xtitle="Department"  ytitle="Water Consumption (gallons) "></column-chart>
+    <column-chart :data="this.dataSet"  xtitle="Department"  ytitle="Water Consumption (m3) "></column-chart>
     
   </div>
 </template>
